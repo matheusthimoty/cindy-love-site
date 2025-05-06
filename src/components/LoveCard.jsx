@@ -84,14 +84,14 @@ export default function LoveCard() {
   const memories = [
     {
       id: 1,
-      image: "src/assets/fotofoto1.jpg",
+      image: "public/videos/fotofoto1.jpg",
       date: "26/04/2025",
       title: "Nosso Primeiro Dia",
-      description: "O dia em que tudo começou"
+      description: "O dia em que tudo começouuuu"
     },
     {
       id: 2,
-      image: "src/assets/foto1.jpg",
+      image: "public/videos/foto1.jpg",
       date: "02/05/2025",
       title: "Primeira vez que te vi e você tava uma delicia",
       description: "Dia da do Until Down e barulhos suspeitos"
@@ -99,7 +99,7 @@ export default function LoveCard() {
 
     {
       id: 3,
-      image: "src/assets/abugi.jpg",
+      image: "public/videos/abugi.jpg",
       date: "02/05/2025",
       title: "Hmmm abugi deu ate fome agora",
       description: "O lanche todo erado pq o bk era pobre pqp"
@@ -107,7 +107,7 @@ export default function LoveCard() {
 
     {
       id: 4,
-      image: "src/assets/tadinho.png",
+      image: "public/videos/tadinho.png",
       date: "02/05/2025",
       title: "Eu fico assim quando você me manda mensagem",
       description: "Amo quando você me manda mensagem, mesmo que seja só um 'oi'",
@@ -115,36 +115,36 @@ export default function LoveCard() {
   ];
 
   // Configurações premium do carrossel
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 10000,
-    pauseOnHover: !isMobile,
-    arrows: !isMobile,
-    fade: true,
-    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
-    customPaging: i => (
-      <div className={`w-3 h-1 rounded-full transition-all duration-500 ${i === activeMemory ? 'bg-pink-600 w-8' : 'bg-pink-300'}`} />
-    ),
-    appendDots: dots => (
-      <div className="pb-4">
-        <ul className="m-0 p-0 flex justify-center space-x-2">{dots}</ul>
-      </div>
-    ),
-    beforeChange: (current, next) => {
-      setActiveMemory(next);
-      if (containerRef.current) {
-        containerRef.current.classList.add('animate-pulse');
-        setTimeout(() => {
-          containerRef.current?.classList.remove('animate-pulse');
-        }, 300);
+    const sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 800,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 10000,
+      pauseOnHover: !isMobile,
+      arrows: !isMobile,
+      fade: true,
+      cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+      customPaging: i => (
+        <div className={`w-3 h-1 rounded-full transition-all duration-500 ${i === activeMemory ? 'bg-pink-600 w-8' : 'bg-pink-300'}`} />
+      ),
+      appendDots: dots => (
+        <div className="pb-4">
+          <ul className="m-0 p-0 flex justify-center space-x-2">{dots}</ul>
+        </div>
+      ),
+      beforeChange: (current, next) => {
+        setActiveMemory(next);
+        if (containerRef.current) {
+          containerRef.current.classList.add('animate-pulse');
+          setTimeout(() => {
+            containerRef.current?.classList.remove('animate-pulse');
+          }, 300);
+        }
       }
-    }
-  };
+    };
 
   // Efeito de corações premium
   const handleLoveTap = () => {
@@ -265,7 +265,7 @@ export default function LoveCard() {
 
       {/* Seção Hero com Vídeo Parallax */}
       <div className="relative h-[90vh] min-h-[600px] overflow-hidden touch-none">
-        <video
+          <video
           ref={videoRef}
           autoPlay
           loop
@@ -273,12 +273,12 @@ export default function LoveCard() {
           playsInline
           disablePictureInPicture
           preload="auto"
-          className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-105"
+          className={`absolute top-0 left-0 w-full h-full object-cover z-0 ${isMobile ? 'scale-100' : 'scale-105'}`}
           poster="/images/video-poster-mobile.jpg"
           style={{ transition: 'transform 0.5s ease-out' }}
         >
-          <source src="/videos/love-video.mp4" type="video/mp4" />
-          <source src="/videos/love-video.webm" type="video/webm" />
+          <source src="/cindy-love-site/videos/love-video.mp4" type="video/mp4" />
+          <source src="/cindy-love-site/videos/love-video.webm" type="video/webm" />
         </video>
         
         <div className="absolute inset-0 bg-black/25 flex flex-col items-center justify-center z-10 p-4">
@@ -291,7 +291,7 @@ export default function LoveCard() {
           
           <button 
             onClick={handleLoveTap}
-            className={`mt-8 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-4 rounded-full font-bold shadow-lg transform transition-all duration-300 active:scale-95 active:shadow-md touch-feedback ${
+            className={`mt-8 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-10 py-5 rounded-full font-bold shadow-lg transform transition-all duration-300 active:scale-95 active:shadow-md touch-feedback ${
               loveTaps > 0 ? 'animate-pulse' : ''
             }`}
             style={{ WebkitTapHighlightColor: 'transparent' }}
@@ -320,13 +320,13 @@ export default function LoveCard() {
             <div key={memory.id} className="px-1 outline-none">
               <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-white/40 active:scale-95 transition-transform duration-200 touch-feedback">
                 <div className="relative" style={{ paddingTop: '125%' }}>
-                  <img
-                    src={memory.image}
-                    alt={memory.title}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                    loading={index < 2 ? 'eager' : 'lazy'}
-                    decoding="async"
-                  />
+          <img
+            src={memory.image}
+            alt={memory.title}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            loading={isMobile && index > 0 ? 'lazy' : 'eager'}
+            decoding="async"
+          />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-5">
                   <p className="text-xs text-pink-200 font-medium">{memory.date}</p>
